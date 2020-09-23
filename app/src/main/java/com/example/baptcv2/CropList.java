@@ -1,64 +1,61 @@
 package com.example.baptcv2;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.WindowManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CropList#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class CropList extends Fragment {
+import com.example.baptcv2.Adapter.CropsAdapter;
+import com.example.baptcv2.Database.Crops;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class CropList extends AppCompatActivity {
 
-    public CropList() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CropList.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CropList newInstance(String param1, String param2) {
-        CropList fragment = new CropList();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    RecyclerView recyclerView;
+    FloatingActionButton floatingActionButton;
+    List<Crops> cropsList;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_crop_list);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        floatingActionButton = findViewById(R.id.fab_add);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
+            }
+        });
+
+        initData();
+        setRecyclerView();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_crop_list, container, false);
+    private void openDialog() {
+
+        AddDialog addDialog = new AddDialog();
+        addDialog.show(getSupportFragmentManager(),"Add Dialog");
+    }
+
+    private void setRecyclerView() {
+        CropsAdapter cropsAdapter = new CropsAdapter(cropsList);
+        recyclerView.setAdapter(cropsAdapter);
+    }
+
+    private void initData() {
+        cropsList = new ArrayList<>();
+        cropsList.add(new Crops("Sample", "Sample", "Sample", "Sample", "Sample"));
+        cropsList.add(new Crops("Sample", "Sample", "Sample", "Sample", "Sample"));
+        cropsList.add(new Crops("Sample", "Sample", "Sample", "Sample", "Sample"));
+
     }
 }

@@ -64,13 +64,13 @@ public class HomeDashboard extends AppCompatActivity implements View.OnClickList
 
 
             case R.id.cardview_croplist:
-                i = new Intent(this, Profile.class);
+                i = new Intent(this, CropList.class);
                 startActivity(i);
                 break;
 
 
             case R.id.cardview_ship:
-                i = new Intent(this, Profile.class);
+                i = new Intent(this, Ship.class);
                 startActivity(i);
                 break;
 

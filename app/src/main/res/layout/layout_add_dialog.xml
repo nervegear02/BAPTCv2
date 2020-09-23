@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mat_add_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/add_crop_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Crop Name" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mat_add_price"
+        android:layout_below="@+id/mat_add_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/add_crop_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Crop Price"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mat_add_volume"
+        android:layout_below="@+id/mat_add_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/add_crop_volume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Crop Volume" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/text_planted"
+        android:layout_below="@+id/mat_add_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/muli_extralight"
+        android:text="Date Planted"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <DatePicker
+        android:id="@+id/planted_picker"
+        android:layout_below="@id/text_planted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:spinnersShown="true" />
+
+    <TextView
+        android:id="@+id/text_harvested"
+        android:layout_below="@+id/planted_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/muli_extralight"
+        android:text="Date Harvested"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <DatePicker
+        android:id="@+id/harvested_picker"
+        android:layout_below="@id/text_harvested"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:spinnersShown="true" />
+
+</RelativeLayout>

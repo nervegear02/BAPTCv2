@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="2dp"
+    app:cardUseCompatPadding="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_layout"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/crop_name"
+            android:text="Crop Name"
+            android:textSize="22sp"
+            android:fontFamily="@font/muli_semibold"
+            android:padding="16dp"
+            android:textColor="@android:color/black"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expandable_layout" >
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date_planted"
+            android:text="Date Planted"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/muli_extralight"
+            android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/date_harvested"
+                android:text="Date Harvested"
+                android:layout_alignParentRight="true"
+                android:padding="16dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/muli_extralight"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date_planted"
+                android:id="@+id/crop_price"
+                android:text="Price"
+                android:padding="16dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/muli_extralight"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date_harvested"
+                android:id="@+id/crop_volume"
+                android:text="Volume"
+                android:layout_alignParentRight="true"
+                android:padding="16dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/muli_extralight"
+                android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/crop_sold_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/crop_price"
+                android:layout_marginLeft="100dp"
+                android:text="Sold"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/muli_semibold"
+                android:background="@android:color/transparent"/>
+
+            <Button
+                android:id="@+id/crop_ship_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/crop_volume"
+                android:layout_marginLeft="225dp"
+                android:text="Ship"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/muli_semibold"
+                android:background="@android:color/transparent"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

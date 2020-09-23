@@ -27,7 +27,6 @@
                 android:textSize="40sp"
                 android:transitionName="transition_title_text" />
 
-
             <TextView
                 android:id="@+id/signup_slide_text"
                 android:layout_width="100dp"
@@ -45,9 +44,7 @@
                 android:transitionName="transition_slide_text"
                 android:gravity="center" />
 
-
         </RelativeLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
