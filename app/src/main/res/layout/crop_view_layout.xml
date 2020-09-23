@@ -30,6 +30,16 @@
             android:id="@+id/expandable_layout" >
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date Planted"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date Planted"/>
+
+            <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/date_planted"
@@ -78,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/crop_price"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="85dp"
                 android:text="Sold"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
@@ -90,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/crop_volume"
-                android:layout_marginLeft="225dp"
+                android:layout_marginLeft="200dp"
                 android:text="Ship"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"

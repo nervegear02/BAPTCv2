@@ -13,7 +13,6 @@ import com.example.baptcv2.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-
 public class MyViewHolder extends FirebaseRecyclerAdapter <PriceList, MyViewHolder.ViewHolder> {
 
     public MyViewHolder(@NonNull FirebaseRecyclerOptions<PriceList> options) {

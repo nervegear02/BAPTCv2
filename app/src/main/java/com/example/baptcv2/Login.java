@@ -84,7 +84,6 @@ public class Login extends AppCompatActivity {
         if (rememberMe.isChecked()) {
             SessionManager sessionManager = new SessionManager(Login.this, SessionManager.SESSION_REMEMBERME);
             sessionManager.createRememberMeSession(_phoneNo, _password);
-
         }
 
         //Check database

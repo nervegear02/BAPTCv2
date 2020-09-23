@@ -15,17 +15,21 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.baptcv2.Database.Crops;
+import com.example.baptcv2.Database.SessionManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class AddDialog extends AppCompatDialogFragment {
 
     EditText add_crop_name, add_crop_price, add_crop_volume;
     DatePicker datePlanted, dateHarvested;
-
+    long maxid = 0;
+    String phoneNum;
 
     @NonNull
     @Override
@@ -57,12 +61,18 @@ public class AddDialog extends AppCompatDialogFragment {
                         int harvestedyear = dateHarvested.getYear();
                         String harvested_date = harvestedday + "/" + harvestedmonth + "/" + harvestedyear;
 
-                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        SessionManager sessionManager = new SessionManager(getActivity().getApplicationContext(), SessionManager.SESSION_USERSESSION);
+                        if (sessionManager.checkLogin()) {
+                            HashMap<String, String> userDetails = sessionManager.getUsersDetailsFromSession();
+                            phoneNum = userDetails.get(SessionManager.KEY_SESSIONPHONENO);
+                        }
+
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference myRef = database.getReference("Users");
+                        DatabaseReference userRef = myRef.child(phoneNum);
+                        DatabaseReference phoneRef = userRef.child("Crops");
                         Crops addCrops = new Crops(crop_name, crop_price, crop_volume, planted_date, harvested_date);
-                        myRef.child("Crops").setValue(addCrops);
-
-
+                        phoneRef.push().setValue(addCrops);
                     }
                 });
 

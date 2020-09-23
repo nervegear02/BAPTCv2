@@ -15,6 +15,8 @@ import com.example.baptcv2.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class CropsAdapter extends RecyclerView.Adapter<CropsAdapter.CropsViewHolder> {
@@ -28,21 +30,23 @@ public class CropsAdapter extends RecyclerView.Adapter<CropsAdapter.CropsViewHol
     @NonNull
     @Override
     public CropsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.crop_view_layout, parent, false);
         return new CropsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CropsViewHolder holder, int position) {
+        CropsViewHolder cropsViewHolder = (CropsViewHolder)holder;
         Crops crops = cropsList.get(position);
-        holder.crop_name.setText(crops.getCrop_name());
-        holder.crop_price.setText(crops.getCrop_price());
-        holder.crop_volume.setText(crops.getCrop_volume());
-        holder.crop_planted.setText(crops.getDate_planted());
-        holder.crop_harvested.setText(crops.getDate_harvested());
+        cropsViewHolder.setName(crops.getCrop_name());
+        cropsViewHolder.setPrice("₱" + crops.getCrop_price());
+        cropsViewHolder.setVolume(crops.getCrop_volume() + "kg");
+        cropsViewHolder.setPlanted(crops.getDate_planted());
+        cropsViewHolder.setHarvested(crops.getDate_harvested());
 
         boolean isExpandable = cropsList.get(position).isExpandable();
-        holder.expandableLayout.setVisibility(isExpandable ? View.VISIBLE : View.GONE);
+        cropsViewHolder.expandableLayout.setVisibility(isExpandable ? View.VISIBLE : View.GONE);
 
     }
 
@@ -53,18 +57,11 @@ public class CropsAdapter extends RecyclerView.Adapter<CropsAdapter.CropsViewHol
 
     class CropsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView crop_name, crop_price, crop_volume, crop_planted, crop_harvested;
         LinearLayout linearLayout;
         RelativeLayout expandableLayout;
 
         public CropsViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            crop_name = itemView.findViewById(R.id.crop_name);
-            crop_price = itemView.findViewById(R.id.crop_price);
-            crop_volume = itemView.findViewById(R.id.crop_volume);
-            crop_planted = itemView.findViewById(R.id.date_planted);
-            crop_harvested = itemView.findViewById(R.id.date_harvested);
 
             linearLayout = itemView.findViewById(R.id.linear_layout);
             expandableLayout = itemView.findViewById(R.id.expandable_layout);
@@ -77,6 +74,31 @@ public class CropsAdapter extends RecyclerView.Adapter<CropsAdapter.CropsViewHol
                     notifyItemChanged(getAdapterPosition());
                 }
             });
+        }
+
+        public void setName(String name){
+            TextView crop_name = (TextView) itemView.findViewById(R.id.crop_name);
+            crop_name.setText(name);
+        }
+
+        public void setPrice(String price){
+            TextView crop_price = (TextView) itemView.findViewById(R.id.crop_price);
+            crop_price.setText(price);
+        }
+
+        public void setVolume(String volume){
+            TextView crop_volume = (TextView) itemView.findViewById(R.id.crop_volume);
+            crop_volume.setText(volume);
+        }
+
+        public void setPlanted(String planted){
+            TextView crop_planted = (TextView) itemView.findViewById(R.id.date_planted);
+            crop_planted.setText(planted);
+        }
+
+        public void setHarvested(String harvested){
+            TextView crop_harvested = (TextView) itemView.findViewById(R.id.date_harvested);
+            crop_harvested.setText(harvested);
         }
     }
 }

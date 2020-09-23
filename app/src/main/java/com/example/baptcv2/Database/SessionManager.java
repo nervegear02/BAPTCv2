@@ -79,6 +79,8 @@ public class SessionManager {
     public void logoutUserFromSession() {
         editor.clear();
         editor.commit();
+
+
     }
 
     //Remember Me Session
