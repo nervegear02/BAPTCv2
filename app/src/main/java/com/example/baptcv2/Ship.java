@@ -11,8 +11,10 @@ import android.view.WindowManager;
 
 import com.example.baptcv2.Adapter.MyViewHolder;
 import com.example.baptcv2.Adapter.SalesViewHolder;
+import com.example.baptcv2.Adapter.ShipViewHolder;
 import com.example.baptcv2.Database.PriceList;
 import com.example.baptcv2.Database.SessionManager;
+import com.example.baptcv2.Database.ShipDB;
 import com.example.baptcv2.Database.Sold;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -25,13 +27,13 @@ import java.util.HashMap;
 
 public class Ship extends AppCompatActivity {
 
-    private FirebaseRecyclerOptions<Sold> options;
+    private FirebaseRecyclerOptions<ShipDB> options;
 
     private RecyclerView recyclerView;
 
     String phoneNum;
 
-    SalesViewHolder adapter;
+    ShipViewHolder adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,27 +49,27 @@ public class Ship extends AppCompatActivity {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         DatabaseReference userRef = ref.child(phoneNum);
-        DatabaseReference phoneRef = userRef.child("Sales");
-        phoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds:snapshot.getChildren()) {
-                    String value = String.valueOf(ds.child("date_sales").getValue());
-                    Log.i("OUR VALUE", value);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+        DatabaseReference phoneRef = userRef.child("Shipping");
+//        phoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot ds:snapshot.getChildren()) {
+//                    String value = String.valueOf(ds.child("date_sales").getValue());
+//                    Log.i("OUR VALUE", value);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        options = new FirebaseRecyclerOptions.Builder<Sold>().setQuery(phoneRef, Sold.class).build();
+        options = new FirebaseRecyclerOptions.Builder<ShipDB>().setQuery(phoneRef, ShipDB.class).build();
 
-        adapter = new SalesViewHolder(options);
+        adapter = new ShipViewHolder(options);
         recyclerView.setAdapter(adapter);
     }
 

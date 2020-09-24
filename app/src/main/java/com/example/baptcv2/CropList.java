@@ -10,15 +10,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.baptcv2.Adapter.CropsAdapter;
 import com.example.baptcv2.Callbacks.MyButtonClickListener;
 import com.example.baptcv2.Database.Crops;
 import com.example.baptcv2.Database.SessionManager;
+import com.example.baptcv2.Database.ShipDB;
 import com.example.baptcv2.Database.Sold;
 import com.example.baptcv2.Helper.MySwipeHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CropList extends AppCompatActivity {
 
@@ -72,7 +76,7 @@ public class CropList extends AppCompatActivity {
         phoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds:snapshot.getChildren()) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     Crops data = ds.getValue(Crops.class);
                     cropsList.add(data);
                 }
@@ -107,13 +111,14 @@ public class CropList extends AppCompatActivity {
                 phoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot ds:snapshot.getChildren()) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
                             Crops ndata = ds.getValue(Crops.class);
                             cropsList.add(ndata);
                         }
                         cropsAdapter = new CropsAdapter(cropsList);
                         recyclerView.setAdapter(cropsAdapter);
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -155,36 +160,53 @@ public class CropList extends AppCompatActivity {
                         new MyButtonClickListener() {
                             @Override
                             public void onClick(int pos) {
-                                Toast.makeText(CropList.this, "Ship", Toast.LENGTH_SHORT).show();
+                                Common.cropsSelected = cropsList.get(pos);
+                                showShipDialog();
                             }
                         }));
             }
         };
     }
 
-    private void soldCrops() {
+    private void showShipDialog() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CropList.this);
+        builder.setTitle("Ship");
+        builder.setMessage("Please fill information");
+
+        View itemView = LayoutInflater.from(CropList.this).inflate(R.layout.layout_ship_dialog, null);
+        final EditText edt_destination_name = (EditText) itemView.findViewById(R.id.edt_destination_name);
+
+        builder.setNegativeButton("CANCEL", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.setPositiveButton("SHIP", (dialogInterface, i) -> {
+            Map<String, Object> addShip = new HashMap<>();
+            addShip.put("name", edt_destination_name.getText().toString());
+            addShip(addShip);
+        });
+
+        builder.setView(itemView);
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void addShip(Map<String, Object> addShip) {
+        String _crop_name = String.valueOf(Common.cropsSelected.getCrop_name());
+        String _crop_price = String.valueOf(Common.cropsSelected.getCrop_price());
+        String _crop_volume = String.valueOf(Common.cropsSelected.getCrop_volume());
+        String _destination = addShip.values().toString().replace("[", "")
+                .replace("]", "")
+                .trim();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Users");
         DatabaseReference userRef = myRef.child(phoneNum);
-        phoneRef = userRef.child("Crops");
-        phoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds:snapshot.getChildren()) {
-                    String value = String.valueOf(Common.cropsSelected.getCrop_name());
-                    Log.i("OUR VALUE", value);
-                }
-            }
+        DatabaseReference phoneRef = userRef.child("Shipping");
+        ShipDB addShipValue = new ShipDB(_crop_name, _crop_price, _crop_volume, date_sales, _destination);
+        phoneRef.push().setValue(addShipValue);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
     }
 
     private void openDialog() {
         AddDialog addDialog = new AddDialog();
-        addDialog.show(getSupportFragmentManager(),"Add Dialog");
+        addDialog.show(getSupportFragmentManager(), "Add Dialog");
     }
 
 }
