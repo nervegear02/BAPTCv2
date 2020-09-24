@@ -1,16 +1,29 @@
 package com.example.baptcv2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+
+import com.example.baptcv2.Database.SessionManager;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class HomeDashboard extends AppCompatActivity implements View.OnClickListener {
 
     CardView profile, pricelist, croplist, ship, sales, signout;
+
+    String phoneNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +46,29 @@ public class HomeDashboard extends AppCompatActivity implements View.OnClickList
         ship.setOnClickListener(this);
         sales.setOnClickListener(this);
         signout.setOnClickListener(this);
+
+        SessionManager sessionManager = new SessionManager(HomeDashboard.this, SessionManager.SESSION_USERSESSION);
+        if (sessionManager.checkLogin()) {
+            HashMap<String, String> userDetails = sessionManager.getUsersDetailsFromSession();
+            phoneNum = userDetails.get(SessionManager.KEY_SESSIONPHONENO);
+        }
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference userRef = ref.child(phoneNum);
+        DatabaseReference phoneRef = userRef.child("Sales");
+        phoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds:snapshot.getChildren()) {
+                    String value = String.valueOf(ds.child("crop_volume").getValue());
+                    Log.i("OUR VALUE", value);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
     }
 

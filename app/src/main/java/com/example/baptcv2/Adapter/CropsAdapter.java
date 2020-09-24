@@ -1,8 +1,11 @@
 package com.example.baptcv2.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baptcv2.Database.Crops;
 import com.example.baptcv2.R;
+import com.example.baptcv2.SignUp;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
@@ -37,6 +41,7 @@ public class CropsAdapter extends RecyclerView.Adapter<CropsAdapter.CropsViewHol
 
     @Override
     public void onBindViewHolder(@NonNull CropsViewHolder holder, int position) {
+
         CropsViewHolder cropsViewHolder = (CropsViewHolder)holder;
         Crops crops = cropsList.get(position);
         cropsViewHolder.setName(crops.getCrop_name());
