@@ -28,11 +28,11 @@ import java.util.HashMap;
 
 public class AddDialog extends AppCompatDialogFragment {
 
-    EditText add_crop_name, add_crop_price, add_crop_volume;
+    EditText add_crop_name, add_crop_volume;
 
     DatePicker datePlanted, dateHarvested;
     long maxid = 0;
-    String phoneNum;
+    String phoneNum, _userName;
 
     @NonNull
     @Override
@@ -53,7 +53,6 @@ public class AddDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String crop_name = add_crop_name.getText().toString();
-                        String crop_price = add_crop_price.getText().toString();
                         String crop_volume = add_crop_volume.getText().toString();
                         int plantedday = datePlanted.getDayOfMonth();
                         int plantedmonth = datePlanted.getMonth();
@@ -67,6 +66,8 @@ public class AddDialog extends AppCompatDialogFragment {
                         SessionManager sessionManager = new SessionManager(getActivity().getApplicationContext(), SessionManager.SESSION_USERSESSION);
                         if (sessionManager.checkLogin()) {
                             HashMap<String, String> userDetails = sessionManager.getUsersDetailsFromSession();
+                            String userName = userDetails.get(SessionManager.KEY_FULLNAME);
+                            _userName = userName.toString();
                             phoneNum = userDetails.get(SessionManager.KEY_SESSIONPHONENO);
                         }
 
@@ -74,13 +75,12 @@ public class AddDialog extends AppCompatDialogFragment {
                         DatabaseReference myRef = database.getReference("Users");
                         DatabaseReference userRef = myRef.child(phoneNum);
                         DatabaseReference phoneRef = userRef.child("Crops");
-                        Crops addCrops = new Crops(crop_name, crop_price, crop_volume, planted_date, harvested_date);
+                        Crops addCrops = new Crops(_userName, crop_name, crop_volume, planted_date, harvested_date, false);
                         phoneRef.push().setValue(addCrops);
                     }
                 });
 
         add_crop_name = view.findViewById(R.id.add_crop_name);
-        add_crop_price = view.findViewById(R.id.add_crop_price);
         add_crop_volume = view.findViewById(R.id.add_crop_volume);
         datePlanted = view.findViewById(R.id.planted_picker);
         dateHarvested = view.findViewById(R.id.harvested_picker);

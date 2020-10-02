@@ -47,6 +47,7 @@ public class SignUp4th extends AppCompatActivity {
         String _gender = getIntent().getStringExtra("gender");
         String _origin = getIntent().getStringExtra("origin");
         String _current = getIntent().getStringExtra("current");
+        String _currentp = getIntent().getStringExtra("cprovince");
 
         //Get Number
         String _getUserEnteredPhoneNumber = phoneNumber.getEditText().getText().toString().trim();
@@ -62,6 +63,7 @@ public class SignUp4th extends AppCompatActivity {
         intent.putExtra("date", _date);
         intent.putExtra("gender", _gender);
         intent.putExtra("phoneNo", _phoneNo);
+        intent.putExtra("cprovince", _currentp);
         intent.putExtra("whatToDo", "createNewUser");
 
         //Add Transition

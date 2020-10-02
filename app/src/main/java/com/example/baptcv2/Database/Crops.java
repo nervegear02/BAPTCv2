@@ -1,19 +1,27 @@
 package com.example.baptcv2.Database;
 
 public class Crops {
-    private String crop_name, crop_price, crop_volume, date_planted, date_harvested;
+    private String userName, crop_name, crop_volume, date_planted, date_harvested, isShip;
     private boolean expandable;
 
     public Crops() {
     }
 
-    public Crops(String crop_name, String crop_price, String crop_volume, String date_planted, String date_harvested) {
+    public Crops(String userName, String crop_name, String crop_volume, String date_planted, String date_harvested, boolean expandable) {
+        this.userName = userName;
         this.crop_name = crop_name;
-        this.crop_price = crop_price;
         this.crop_volume = crop_volume;
         this.date_planted = date_planted;
         this.date_harvested = date_harvested;
-        this.expandable = false;
+        this.expandable = expandable;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public boolean isExpandable() {
@@ -30,14 +38,6 @@ public class Crops {
 
     public void setCrop_name(String crop_name) {
         this.crop_name = crop_name;
-    }
-
-    public String getCrop_price() {
-        return crop_price;
-    }
-
-    public void setCrop_price(String crop_price) {
-        this.crop_price = crop_price;
     }
 
     public String getCrop_volume() {
@@ -68,7 +68,6 @@ public class Crops {
     public String toString() {
         return "Crops{" +
                 "crop_name='" + crop_name + '\'' +
-                ", crop_price='" + crop_price + '\'' +
                 ", crop_volume='" + crop_volume + '\'' +
                 ", date_planted='" + date_planted + '\'' +
                 ", date_harvested='" + date_harvested + '\'' +

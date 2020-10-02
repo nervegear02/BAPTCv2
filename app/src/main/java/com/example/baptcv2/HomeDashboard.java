@@ -106,7 +106,7 @@ public class HomeDashboard extends AppCompatActivity implements View.OnClickList
 
 
             case R.id.cardview_ship:
-                i = new Intent(this, Ship.class);
+                i = new Intent(this, ToolsList.class);
                 startActivity(i);
                 break;
 

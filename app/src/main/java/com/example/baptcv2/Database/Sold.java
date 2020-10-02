@@ -1,16 +1,17 @@
 package com.example.baptcv2.Database;
 
 public class Sold {
-    private String crop_name, crop_price, crop_volume, date_sales;
+    private String crop_name, crop_price, crop_volume, date_sales, sold_to;
 
     public Sold() {
     }
 
-    public Sold(String crop_name, String crop_price, String crop_volume, String date_sales) {
+    public Sold(String crop_name, String crop_price, String crop_volume, String date_sales, String sold_to) {
         this.crop_name = crop_name;
         this.crop_price = crop_price;
         this.crop_volume = crop_volume;
         this.date_sales = date_sales;
+        this.sold_to = sold_to;
     }
 
     public String getCrop_name() {
@@ -43,5 +44,13 @@ public class Sold {
 
     public void setDate_sales(String date_sales) {
         this.date_sales = date_sales;
+    }
+
+    public String getSold_to() {
+        return sold_to;
+    }
+
+    public void setSold_to(String sold_to) {
+        this.sold_to = sold_to;
     }
 }

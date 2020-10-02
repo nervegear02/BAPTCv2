@@ -20,23 +20,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mat_add_price"
-        android:layout_below="@+id/mat_add_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/add_crop_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Crop Price"
-            android:inputType="number" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/mat_add_volume"
-        android:layout_below="@+id/mat_add_price"
+        android:layout_below="@+id/mat_add_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

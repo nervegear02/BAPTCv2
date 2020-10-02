@@ -26,10 +26,9 @@ public class SignUp2nd extends AppCompatActivity {
     TextView titleText, slideText;
     LinearLayout clinearprovince, clinearmunicipality, clinearbarangay;
 
-    String _province, _municipality, _barangay, _cprovince, _cmunicipality, _cbarangay, _current;
+    String _province, _municipality, _barangay, _cprovince, _cmunicipality, _cbarangay, _current, _origin, _currentp;
 
     Spinner province, municipality, barangay, cprovince, cmunicipality, cbarangay;
-    CheckBox checkBox;
 
     //Array adapter for parent(province)
     ArrayList<String> arrayList_parent;
@@ -58,7 +57,6 @@ public class SignUp2nd extends AppCompatActivity {
         cprovince = findViewById(R.id.current_province);
         cmunicipality = findViewById(R.id.current_municipality);
         cbarangay = findViewById(R.id.current_barangay);
-        checkBox = findViewById(R.id.currentPlace);
         clinearprovince = findViewById(R.id.clinearprovince);
         clinearmunicipality = findViewById(R.id.clinearmunicipality);
         clinearbarangay = findViewById(R.id.clinearbarangay);
@@ -421,54 +419,30 @@ public class SignUp2nd extends AppCompatActivity {
 
             }
         });
-
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    clinearprovince.setVisibility(View.GONE);
-                    clinearmunicipality.setVisibility(View.GONE);
-                    clinearbarangay.setVisibility(View.GONE);
-
-                    _province = province.getSelectedItem().toString().trim();
-                    _municipality = municipality.getSelectedItem().toString().trim();
-                    _barangay = barangay.getSelectedItem().toString().trim();
-                    _current = (_barangay + " "+ _municipality + " " + _province);
-
-                } else {
-                    clinearprovince.setVisibility(View.VISIBLE);
-                    clinearmunicipality.setVisibility(View.VISIBLE);
-                    clinearbarangay.setVisibility(View.VISIBLE);
-
-                }
-            }
-        });
     }
 
 
     public void callNextSignupScreen(View view) {
+        String _fullname = getIntent().getStringExtra("fullname");
+        String _password = getIntent().getStringExtra("password");
 
-        //Get Values
+        Intent intent = new Intent(getApplicationContext(), SignUp3rd.class);
         _province = province.getSelectedItem().toString().trim();
         _municipality = municipality.getSelectedItem().toString().trim();
         _barangay = barangay.getSelectedItem().toString().trim();
         _cprovince = cprovince.getSelectedItem().toString().trim();
         _cmunicipality = cmunicipality.getSelectedItem().toString().trim();
         _cbarangay = cbarangay.getSelectedItem().toString().trim();
+        _origin = (_barangay + " "+ _municipality + " " + _province);
         _current = (_cbarangay + " "+ _cmunicipality + " " + _cprovince);
-        String _origin = (_barangay + " "+ _municipality + " " + _province);
-
-
-        String _fullname = getIntent().getStringExtra("fullname");
-        String _password = getIntent().getStringExtra("password");
-
-        Intent intent = new Intent(getApplicationContext(), SignUp3rd.class);
+        _currentp = _cprovince;
 
         //Pass all fields to the next activity
         intent.putExtra("fullname", _fullname);
         intent.putExtra("password", _password);
         intent.putExtra("origin", _origin);
         intent.putExtra("current", _current);
+        intent.putExtra("cprovince", _currentp);
 
         //Add Shared Animation
         Pair[] pairs = new Pair[4];

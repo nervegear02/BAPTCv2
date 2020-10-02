@@ -9,16 +9,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="17dp"
+        android:text="Sold to" />
+
+    <TextView
+        android:id="@+id/sold_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/muli_extralight"
+        android:padding="16dp"
+        android:text="Sold to"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sold_to"
+        android:layout_marginLeft="17dp"
         android:text="Crop Name" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/sold_to"
         android:layout_marginLeft="230dp"
         android:text="Date of Sales" />
 
     <TextView
         android:id="@+id/crop_name"
+        android:layout_below="@+id/sold_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/muli_extralight"
@@ -32,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/sold_to"
         android:fontFamily="@font/muli_extralight"
         android:padding="16dp"
         android:text="Date of Sales"

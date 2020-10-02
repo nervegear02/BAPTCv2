@@ -13,6 +13,8 @@ import com.example.baptcv2.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import org.w3c.dom.Text;
+
 public class SalesViewHolder extends FirebaseRecyclerAdapter<Sold, SalesViewHolder.salesViewHolder> {
 
     public SalesViewHolder(@NonNull FirebaseRecyclerOptions<Sold> options) {
@@ -21,6 +23,7 @@ public class SalesViewHolder extends FirebaseRecyclerAdapter<Sold, SalesViewHold
 
     @Override
     protected void onBindViewHolder(@NonNull salesViewHolder holder, int position, @NonNull Sold model) {
+        holder.sold_to.setText(model.getSold_to());
         holder.crop_name.setText(model.getCrop_name());
         holder.crop_price.setText("₱" + model.getCrop_price());
         holder.date_sales.setText(model.getDate_sales());
@@ -36,9 +39,10 @@ public class SalesViewHolder extends FirebaseRecyclerAdapter<Sold, SalesViewHold
     }
 
     public class salesViewHolder extends RecyclerView.ViewHolder {
-        TextView crop_name, date_sales, crop_price, crop_volume;
+        TextView sold_to, crop_name, date_sales, crop_price, crop_volume;
         public salesViewHolder(@NonNull View itemView) {
             super(itemView);
+            sold_to = (TextView) itemView.findViewById(R.id.sold_to);
             crop_name = (TextView) itemView.findViewById(R.id.crop_name);
             date_sales = (TextView) itemView.findViewById(R.id.date_sales);
             crop_price = (TextView) itemView.findViewById(R.id.crop_price);

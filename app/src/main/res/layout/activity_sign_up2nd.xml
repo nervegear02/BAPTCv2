@@ -142,13 +142,6 @@
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
-                <CheckBox
-                    android:id="@+id/currentPlace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Same with Place of Origin"
-                    android:textColor="@android:color/black"/>
-
             </LinearLayout>
 
             <LinearLayout

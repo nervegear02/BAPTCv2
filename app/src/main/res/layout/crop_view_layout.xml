@@ -66,38 +66,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/date_planted"
                 android:layout_marginLeft="17dp"
-                android:text="Price" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/date_harvested"
-                android:layout_marginLeft="313dp"
                 android:text="Volume" />
-
-            <TextView
-                android:id="@+id/crop_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/date_planted"
-                android:fontFamily="@font/muli_extralight"
-                android:padding="16dp"
-                android:text="Price"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/crop_volume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/date_harvested"
-                android:layout_alignParentRight="true"
+                android:layout_below="@+id/date_planted"
                 android:fontFamily="@font/muli_extralight"
                 android:padding="16dp"
                 android:text="Volume"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
-
 
         </RelativeLayout>
 

@@ -53,6 +53,7 @@ public class SignUp3rd extends AppCompatActivity {
         String _password = getIntent().getStringExtra("password");
         String _origin = getIntent().getStringExtra("origin");
         String _current = getIntent().getStringExtra("current");
+        String _currentp = getIntent().getStringExtra("cprovince");
 
         selectedGender = findViewById(radioGroup.getCheckedRadioButtonId());
         String _gender = selectedGender.getText().toString();
@@ -73,6 +74,7 @@ public class SignUp3rd extends AppCompatActivity {
         intent.putExtra("origin", _origin);
         intent.putExtra("current", _current);
         intent.putExtra("gender", _gender);
+        intent.putExtra("cprovince", _currentp);
 
         //Add Transition and call next activity
         Pair[] pairs = new Pair[4];

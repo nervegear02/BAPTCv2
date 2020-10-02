@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.baptcv2.Common;
 import com.example.baptcv2.Database.Crops;
 import com.example.baptcv2.R;
 import com.example.baptcv2.SignUp;
@@ -45,7 +46,6 @@ public class CropsAdapter extends RecyclerView.Adapter<CropsAdapter.CropsViewHol
         CropsViewHolder cropsViewHolder = (CropsViewHolder)holder;
         Crops crops = cropsList.get(position);
         cropsViewHolder.setName(crops.getCrop_name());
-        cropsViewHolder.setPrice("₱" + crops.getCrop_price());
         cropsViewHolder.setVolume(crops.getCrop_volume() + "kg");
         cropsViewHolder.setPlanted(crops.getDate_planted());
         cropsViewHolder.setHarvested(crops.getDate_harvested());
@@ -84,11 +84,6 @@ public class CropsAdapter extends RecyclerView.Adapter<CropsAdapter.CropsViewHol
         public void setName(String name){
             TextView crop_name = (TextView) itemView.findViewById(R.id.crop_name);
             crop_name.setText(name);
-        }
-
-        public void setPrice(String price){
-            TextView crop_price = (TextView) itemView.findViewById(R.id.crop_price);
-            crop_price.setText(price);
         }
 
         public void setVolume(String volume){

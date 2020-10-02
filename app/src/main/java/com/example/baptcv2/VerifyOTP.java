@@ -30,7 +30,7 @@ public class VerifyOTP extends AppCompatActivity {
     PinView pinFromUser;
     String codeBySystem;
 
-    String fullname, origin, current, phoneNo, password, date, gender, whatToDo;
+    String fullname, origin, current, phoneNo, password, date, gender, whatToDo, currentp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class VerifyOTP extends AppCompatActivity {
         whatToDo = getIntent().getStringExtra("whatToDo");
         origin = getIntent().getStringExtra("origin");
         current = getIntent().getStringExtra("current");
+        currentp = getIntent().getStringExtra("cprovince");
 
         sendVerificationCodeToUser(phoneNo);
     }
@@ -133,6 +134,7 @@ public class VerifyOTP extends AppCompatActivity {
 
         UserHelperClass addNewUser = new UserHelperClass(origin, fullname, current, phoneNo, password, date, gender);
         reference.child(phoneNo).setValue(addNewUser);
+        rootNode.getReference("List").child(currentp).push().setValue(addNewUser);
 
     }
 
