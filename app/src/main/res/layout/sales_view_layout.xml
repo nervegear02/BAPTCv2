@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/crop_name"
         android:layout_marginLeft="17dp"
-        android:text="Price" />
+        android:text="Price Sold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -92,6 +92,24 @@
         android:fontFamily="@font/muli_extralight"
         android:padding="16dp"
         android:text="Volume"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/crop_price"
+        android:layout_marginLeft="17dp"
+        android:text="Total Sales" />
+
+    <TextView
+        android:id="@+id/total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/crop_price"
+        android:fontFamily="@font/muli_extralight"
+        android:padding="16dp"
+        android:text="Total Price"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 

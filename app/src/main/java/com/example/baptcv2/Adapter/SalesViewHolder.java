@@ -28,6 +28,13 @@ public class SalesViewHolder extends FirebaseRecyclerAdapter<Sold, SalesViewHold
         holder.crop_price.setText("₱" + model.getCrop_price());
         holder.date_sales.setText(model.getDate_sales());
         holder.crop_volume.setText(model.getCrop_volume() + "kg");
+        String sprice = model.getCrop_price();
+        String svolume = model.getCrop_volume();
+        int iprice = Integer.parseInt(sprice);
+        int ivolume = Integer.parseInt(svolume);
+        int itotal = iprice * ivolume;
+        String stotal = Integer.toString(itotal);
+        holder.total_price.setText("₱" + stotal);
 
     }
 
@@ -39,7 +46,7 @@ public class SalesViewHolder extends FirebaseRecyclerAdapter<Sold, SalesViewHold
     }
 
     public class salesViewHolder extends RecyclerView.ViewHolder {
-        TextView sold_to, crop_name, date_sales, crop_price, crop_volume;
+        TextView sold_to, crop_name, date_sales, crop_price, crop_volume, total_price;
         public salesViewHolder(@NonNull View itemView) {
             super(itemView);
             sold_to = (TextView) itemView.findViewById(R.id.sold_to);
@@ -47,6 +54,7 @@ public class SalesViewHolder extends FirebaseRecyclerAdapter<Sold, SalesViewHold
             date_sales = (TextView) itemView.findViewById(R.id.date_sales);
             crop_price = (TextView) itemView.findViewById(R.id.crop_price);
             crop_volume = (TextView) itemView.findViewById(R.id.crop_volume);
+            total_price = (TextView) itemView.findViewById(R.id.total_price);
         }
     }
 }

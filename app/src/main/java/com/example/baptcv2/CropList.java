@@ -173,10 +173,6 @@ public class CropList extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (adapterView.getItemAtPosition(i).toString().equals("Others")) {
                     edt_other_destination_name.setVisibility(View.VISIBLE);
-                    Map<String, Object> addShip = new HashMap<>();
-                    addShip.put("name", edt_other_destination_name.getText().toString());
-                    addShip.put("price", edt_price_sold.getText().toString());
-                    addShip(addShip);
                 }
             }
 
@@ -190,10 +186,18 @@ public class CropList extends AppCompatActivity {
         builder.setNegativeButton("CANCEL", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.setPositiveButton("SHIP", (dialogInterface, i) -> {
             String destination = mspinner.getSelectedItem().toString();
-            Map<String, Object> addShip = new HashMap<>();
-            addShip.put("name", destination);
-            addShip.put("price", edt_price_sold.getText().toString());
-            addShip(addShip);
+            if (destination.equals("Others")){
+                Map<String, Object> addShip = new HashMap<>();
+                addShip.put("name", edt_other_destination_name.getText().toString());
+                addShip.put("price", edt_price_sold.getText().toString());
+                addShip(addShip);
+            } else {
+                Map<String, Object> addShip = new HashMap<>();
+                addShip.put("name", destination);
+                addShip.put("price", edt_price_sold.getText().toString());
+                addShip(addShip);
+            }
+
         });
 
         builder.setView(itemView);
